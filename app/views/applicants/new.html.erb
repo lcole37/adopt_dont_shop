@@ -28,7 +28,7 @@
 
   <%= f.submit "Create Application"%>
 
-    <!-- <% #if flash[:alert].present? %>
-  <p <%= #flash[:alert] %></p>
-  <% # end %> -->
+  <% if flash[:alert].present? %>
+    <p <%= flash[:alert] %></p>
+  <% end %>
 <% end %>
