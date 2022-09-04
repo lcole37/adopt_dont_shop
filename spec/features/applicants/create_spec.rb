@@ -6,9 +6,9 @@ RSpec.describe 'application creation' do
       visit '/applicants/new'
 
       expect(page).to have_content("New Application")
-      expect(find('form')).to have_content('First name')
-      expect(find('form')).to have_content('Last name')
-      expect(find('form')).to have_content('Street address')
+      expect(find('form')).to have_content('First Name')
+      expect(find('form')).to have_content('Last Name')
+      expect(find('form')).to have_content('Street Address')
       expect(find('form')).to have_content('City')
       expect(find('form')).to have_content('State')
       expect(find('form')).to have_content('Zipcode')
@@ -22,9 +22,9 @@ RSpec.describe 'application creation' do
     it 'creates the application' do
       visit '/applicants/new'
 
-      fill_in 'First name', with: 'Linda'
-      fill_in 'Last name', with: 'Smith'
-      fill_in 'Street address', with: '737 Royal Lane'
+      fill_in 'First Name', with: 'Linda'
+      fill_in 'Last Name', with: 'Smith'
+      fill_in 'Street Address', with: '737 Royal Lane'
       fill_in 'City', with: 'Columbus'
       select 'OH', :from => 'state'
       fill_in 'Zipcode', with: '39053'
@@ -50,9 +50,9 @@ RSpec.describe 'application creation' do
     it "Then I am taken back to the new applications page" do
       visit '/applicants/new'
 
-      fill_in 'First name', with: 'Linda'
-      fill_in 'Last name', with: 'Smith'
-      fill_in 'Street address', with: '737 Royal Lane'
+      fill_in 'First Name', with: 'Linda'
+      fill_in 'Last Name', with: 'Smith'
+      fill_in 'Street Address', with: '737 Royal Lane'
       fill_in 'City', with: 'Columbus'
       select 'OH', :from => 'state'
       #zipcode was purposely not filled
@@ -63,7 +63,7 @@ RSpec.describe 'application creation' do
       expect(current_path).to eq('/applicants/new')
 
       it "And I see a message that I must fill in those fields." do
-        expect(page).to have_content("All forms must be filled")
+        expect(page).to have_content("Please Enter Data For Each Field")
       end
     end
   end
