@@ -4,7 +4,7 @@
 
 ### database design
 
-![Screen Shot 2022-09-02 at 5 27 58 PM](https://user-images.githubusercontent.com/102636892/188248712-8d8ab377-848a-49b9-aca5-2dbf0dc5099a.png)
+![Screen Shot 2022-09-07 at 4 38 52 PM](https://user-images.githubusercontent.com/102636892/189001416-2c4fd771-8021-4975-8a89-409a545c27f1.png)
 
 
 ## Learning Goals
