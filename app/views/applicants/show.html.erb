@@ -11,7 +11,10 @@
 <h3> Pet(s) Applying for : </h3>
 
 <% @applicant.pets.each do |pet| %>
-<h4 class="id-#{pet.id}"><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h4>
+  <h4 class="id-#{pet.id}"><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h4>
+  <% if @admin_mode? %>
+  <%= button_to "Approve #{pet.name}", "/admin/applicants/#{@applicant.id}?status=Approved", method: :patch %>
+  <% end %>
 <% end %><br>
 
 <% if @applicant.status == "In Progress" %>

@@ -1,5 +1,9 @@
 class ApplicantsController < ApplicationController
   def show
+    binding.pry
+    if params[:admin].present?
+      @admin_mode = true
+    end
     @applicant = Applicant.find(params[:id])
     if params[:pet_search].present?
       @pets = Pet.search(params[:pet_search])
@@ -36,7 +40,8 @@ class ApplicantsController < ApplicationController
   end
 
   def admin
-    
+    applicant = Applicant.find(params[:id])
+    redirect_to "/applicants/#{applicant.id}?admin=true"
   end
 
 private
