@@ -6,6 +6,7 @@ class SheltersController < ApplicationController
       @shelters = Shelter.search(params[:search])
     elsif params[:admin]
       @shelters = Shelter.reverse_alpha
+      @pending_shelters = Shelter.pending_applications
     else
       @shelters = Shelter.order_by_recently_created
     end
