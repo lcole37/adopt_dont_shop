@@ -35,6 +35,10 @@ class ApplicantsController < ApplicationController
     end
   end
 
+  def admin
+    
+  end
+
 private
   def app_params
     params.permit(:first_name, :last_name, :street_address, :city, :state, :zipcode, :description, :status)

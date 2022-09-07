@@ -263,4 +263,42 @@ RSpec.describe 'applicant show page' do
       end
     end
   end
+
+  # User Story 13
+  # As a visitor
+  # When I visit an admin application show page ('/admin/applications/:id')
+  # For every pet that the application is for, I see a button to approve the application for that specific pet
+  # When I click that button
+  # Then I'm taken back to the admin application show page
+  # And next to the pet that I approved, I do not see a button to approve this pet
+  # And instead I see an indicator next to the pet that they have been approved
+
+  describe 'as an admin' do
+    describe 'When I visit an admin applicant show page' do
+      before :each do
+        @shelter = Shelter.create!(foster_program: true, name: "Pet Friends of Kansas", city: "Topeka", rank: 8)
+        @cat1 = @shelter.pets.create!(adoptable: true, age: 7, breed: 'Persian', name: 'SlimJim')
+        @cat2 = @shelter.pets.create!(adoptable: true, age: 1, breed: 'Tabby', name: 'Catmobile')
+        @app = Applicant.create!(first_name: 'Sally', last_name: 'Field', street_address: '115 Oakview Avenue', city: 'Topeka', state: 'Kansas', zipcode: '65119', status: 'In Progress')
+        @app.pets << @cat1
+        @app.pets << @cat2
+        visit "/admin/applicants/#{@app.id}"
+      end
+      context "For every pet that the applicant has added" do
+        it "I see a button to approve the application for that specific pet" do
+
+          within ".id-#{@cat1.id}" do
+            expect(page).to have_button("Approve this Pet")
+          end
+          within ".id-#{@cat2.id}" do
+            expect(page).to have_button("Approve this Pet")
+          end
+        end
+
+        it "When I click that button, Then I'm taken back to the admin applicant show page" do
+
+        end
+      end
+    end
+  end
 end

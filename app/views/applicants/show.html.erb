@@ -11,7 +11,7 @@
 <h3> Pet(s) Applying for : </h3>
 
 <% @applicant.pets.each do |pet| %>
-<h4><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h4>
+<h4 class="id-#{pet.id}"><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h4>
 <% end %><br>
 
 <% if @applicant.status == "In Progress" %>
