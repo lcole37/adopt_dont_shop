@@ -18,9 +18,9 @@ RSpec.describe 'As a visitor' do
 
     describe "Then I see a section for Shelters with Pending Applications" do
       it "in this section I see the name of every shelter that has a pending application" do
-        @pirate = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
-        @clawdia = @shelter_3.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
-        @lucille = @shelter_2.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
+        @pirate = @shelter_1.pets.create!(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
+        @clawdia = @shelter_3.pets.create!(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
+        @lucille = @shelter_2.pets.create!(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
             #RGV has no pets currently
         @billy = Applicant.create!(first_name: "Billy",
                                   last_name: "Jameson",
@@ -45,9 +45,9 @@ RSpec.describe 'As a visitor' do
                                   state: "CA",
                                   zipcode: 90210,
                                   status: "In Progress")
-        @aurora = @shelter1
-        @rgv = @shelter2
-        @fancy = @shelter3
+        @aurora = @shelter_1
+        @rgv = @shelter_2
+        @fancy = @shelter_3
 
         PetApplication.create!(pet: @pirate, applicant: @billy)
         PetApplication.create!(pet: @clawdia, applicant: @johnny)
@@ -56,11 +56,13 @@ RSpec.describe 'As a visitor' do
 
         visit '/admin/shelters'
 
-        expect(page).to have_content("Pending Applications")
-        #use within here
-        expect(page).to have_content("#{@aurora.name}")
-        expect(page).to have_content("#{@fancy.name}")
-        expect(page).not_to have_content("#{@rgv.name}")
+
+        within(".pending-shelters") do
+          expect(page).to have_content("Shelters With Pending Applications")
+          expect(page).to have_content(@aurora.name)
+          expect(page).to have_content(@fancy.name)
+          expect(page).not_to have_content(@rgv.name)
+        end
       end
     end
   end
