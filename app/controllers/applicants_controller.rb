@@ -1,8 +1,13 @@
 class ApplicantsController < ApplicationController
   def show
-    binding.pry
+    
     if params[:admin].present?
       @admin_mode = true
+      applicant = Applicant.find(params[:id])
+      pets = applicant.pets
+      @applicant_pet = PetApplication.find(applicant_id: params[:id], )
+      binding.pry
+      @status = PetApplication.adoption_status("#{applicant.id}", "#{pet.id}")
     end
     @applicant = Applicant.find(params[:id])
     if params[:pet_search].present?
@@ -15,7 +20,7 @@ class ApplicantsController < ApplicationController
     if !applicant.pets.present?
       pet_to_adopt = Pet.find(params[:pet_to_adopt_id])
       applicant.adopt_pet(pet_to_adopt)
-    end 
+    end
     if params[:status] == "pending"
       
     end

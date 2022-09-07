@@ -286,7 +286,7 @@ RSpec.describe 'applicant show page' do
       end
       context "For every pet that the applicant has added" do
         it "I see a button to approve the application for that specific pet" do
-
+          save_and_open_page
           within ".id-#{@cat1.id}" do
             expect(page).to have_button("Approve this Pet")
           end

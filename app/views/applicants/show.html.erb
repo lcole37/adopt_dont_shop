@@ -12,9 +12,9 @@
 
 <% @applicant.pets.each do |pet| %>
   <h4 class="id-#{pet.id}"><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h4>
-  <% if @admin_mode? %>
-  <%= button_to "Approve #{pet.name}", "/admin/applicants/#{@applicant.id}?status=Approved", method: :patch %>
-  <% end %>
+    <% if @admin_mode? %>
+      <p><%= button_to "Approve #{pet.name}", "/admin/applicants/#{@applicant.id}?adoption_status=Approved", method: :patch %></p>
+    <% end %>
 <% end %><br>
 
 <% if @applicant.status == "In Progress" %>
