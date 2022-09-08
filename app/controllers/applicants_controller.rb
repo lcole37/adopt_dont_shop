@@ -1,5 +1,14 @@
 class ApplicantsController < ApplicationController
   def show
+    
+    if params[:admin].present?
+      @admin_mode = true
+      applicant = Applicant.find(params[:id])
+      pets = applicant.pets
+      @applicant_pet = PetApplication.find(applicant_id: params[:id], )
+      binding.pry
+      @status = PetApplication.adoption_status("#{applicant.id}", "#{pet.id}")
+    end
     @applicant = Applicant.find(params[:id])
     if params[:pet_search].present?
       @pets = Pet.search(params[:pet_search])
@@ -11,7 +20,7 @@ class ApplicantsController < ApplicationController
     if !applicant.pets.present?
       pet_to_adopt = Pet.find(params[:pet_to_adopt_id])
       applicant.adopt_pet(pet_to_adopt)
-    end 
+    end
     if params[:status] == "pending"
       
     end
@@ -33,6 +42,11 @@ class ApplicantsController < ApplicationController
       redirect_to "/applicants/new"
       flash[:alert] = "Please Enter Data For Each Field"
     end
+  end
+
+  def admin
+    applicant = Applicant.find(params[:id])
+    redirect_to "/applicants/#{applicant.id}?admin=true"
   end
 
 private
